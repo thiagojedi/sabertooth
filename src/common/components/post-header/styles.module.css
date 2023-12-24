@@ -1,0 +1,27 @@
+.header {
+  display: grid;
+  grid-template-areas: "image name" "image handle";
+  grid-template-columns: 40px 1fr;
+  /* grid-template-rows: 1rem 1rem; */
+  grid-column-gap: 0.5rem;
+  align-items: center;
+}
+
+.header * {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  overflow: hidden;
+}
+
+.avatar {
+  grid-area: image;
+}
+
+.name {
+  grid-area: name;
+}
+
+.handle {
+  grid-area: handle;
+}
