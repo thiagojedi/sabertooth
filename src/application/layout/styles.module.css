@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  height: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.2rem;
+  background-color: yellow;
+}
+
+.header > * {
+  min-width: 2rem;
+}
+
+.avatar {
+  width: 2rem;
+  height: 2rem;
+}
+
+.title {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: black;
+  text-align: center;
+  font-family: sans-serif;
+}
