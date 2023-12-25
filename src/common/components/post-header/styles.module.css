@@ -2,7 +2,7 @@
   display: grid;
   grid-template-areas: "image name" "image handle";
   grid-template-columns: 40px 1fr;
-  /* grid-template-rows: 1rem 1rem; */
+  grid-template-rows: 1.5rem 1.5rem;
   grid-column-gap: 0.5rem;
   align-items: center;
 }
