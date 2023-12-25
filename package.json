@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@vitejs/plugin-legacy": "^5.2.0",
-    "preact": "^10.19.3"
+    "preact": "^10.19.3",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.7.0",
