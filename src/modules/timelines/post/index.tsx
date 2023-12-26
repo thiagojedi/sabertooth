@@ -7,6 +7,10 @@ import styles from "./styles.module.css";
 export const Post: FunctionalComponent<{ status: Status }> = ({ status }) => {
   const consideredStatus = status.reblog ?? status;
 
+  const content = (
+    <div dangerouslySetInnerHTML={{ __html: consideredStatus.content }} />
+  );
+
   return (
     <section key={status.id} className={styles.post}>
       {status.reblog && <small>boosted by {status.account.display_name}</small>}
@@ -16,7 +20,14 @@ export const Post: FunctionalComponent<{ status: Status }> = ({ status }) => {
         name={consideredStatus.account.display_name}
         url={consideredStatus.account.avatar_static}
       />
-      <p dangerouslySetInnerHTML={{ __html: consideredStatus.content }} />
+      {status.spoiler_text ? (
+        <details>
+          <summary>{status.spoiler_text}</summary>
+          {content}
+        </details>
+      ) : (
+        content
+      )}
       <PostFooter status={consideredStatus} />
     </section>
   );
