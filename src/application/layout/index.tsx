@@ -2,14 +2,18 @@ import { FunctionalComponent } from "preact";
 
 import styles from "./styles.module.css";
 import { Avatar } from "../../common/components/avatar";
-import { getAuthInfo, logout } from "../auth";
-import { LoginForm } from "../auth/login-form.tsx";
+import { logout } from "../auth";
+import { useNavigate } from "react-router-dom";
+
+import { useAuthCallback } from "../auth/use-auth-callback.tsx";
 
 const placeholderImage =
   "https://media.mastodon.com.br/accounts/avatars/111/337/464/121/681/509/original/85bb84897dae35b9.jpg";
 
 export const Layout: FunctionalComponent = ({ children }) => {
-  const { server } = getAuthInfo();
+  useAuthCallback();
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -21,7 +25,7 @@ export const Layout: FunctionalComponent = ({ children }) => {
         <div>
           <button
             onClick={() => {
-              logout().then(() => location.reload());
+              logout().then(() => navigate("/"));
             }}
             title="Logout"
           >
@@ -29,7 +33,7 @@ export const Layout: FunctionalComponent = ({ children }) => {
           </button>
         </div>
       </header>
-      <main>{server ? children : <LoginForm />}</main>
+      <main>{children}</main>
     </>
   );
 };

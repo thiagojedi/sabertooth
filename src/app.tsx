@@ -1,37 +1,10 @@
 import { SWRConfig } from "swr";
 import { PublicTimeline } from "./modules/timelines/public";
 import { Layout } from "./application/layout";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import { getAuthInfo } from "./application/auth";
 import { HomeTimeline } from "./modules/timelines/home.tsx";
-import { LoggingIn } from "./application/auth/logging-in.tsx";
-
-const router = createBrowserRouter(
-  [
-    {
-      element: (
-        <Layout>
-          <Outlet />
-        </Layout>
-      ),
-      children: [
-        {
-          path: "/",
-          element: <HomeTimeline />,
-        },
-        {
-          path: "/public",
-          element: <PublicTimeline />,
-        },
-        {
-          path: "/oauth/callback",
-          element: <LoggingIn />,
-        },
-      ],
-    },
-  ],
-  { basename: import.meta.env.BASE_URL },
-);
+import { LoginForm } from "./application/auth/login-form.tsx";
 
 export const App = () => {
   const { server, token } = getAuthInfo();
@@ -49,7 +22,22 @@ export const App = () => {
               }).then((r) => r.json()),
       }}
     >
-      <RouterProvider router={router} />
+      <HashRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Layout>
+                <Outlet />
+              </Layout>
+            }
+          >
+            <Route index element={<LoginForm />} />
+            <Route path="/home" element={<HomeTimeline />} />
+            <Route path="/public" element={<PublicTimeline />} />
+          </Route>
+        </Routes>
+      </HashRouter>
     </SWRConfig>
   );
 };

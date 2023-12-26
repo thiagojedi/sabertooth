@@ -56,8 +56,6 @@ export const getToken = async (code: string) => {
     const { access_token } = await request.json();
     localStorage.setItem("st_token", access_token);
   }
-
-  return;
 };
 
 export const logout = async () => {
