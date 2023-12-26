@@ -1,0 +1,77 @@
+const callback_url = import.meta.env.VITE_OAUTH_CALLBACK;
+
+export const getAuthInfo = () => ({
+  server: localStorage.getItem("instance_server"),
+  token: localStorage.getItem("st_token")!,
+  clientId: localStorage.getItem("st_client_id")!,
+  clientSecret: localStorage.getItem("st_client_secret")!,
+});
+
+export const authApp = async (server: string) => {
+  localStorage.setItem("instance_server", server);
+
+  const response = await fetch(`https://${server}/api/v1/apps`, {
+    method: "POST",
+    body: new URLSearchParams({
+      client_name: "SaberTooth",
+      redirect_uris: callback_url,
+      scopes: "read write",
+      website: "https://github.com/thiagojedi/sabertooth/",
+    }),
+  });
+
+  if (response.ok) {
+    const { client_id, client_secret } = await response.json();
+
+    localStorage.setItem("st_client_id", client_id);
+    localStorage.setItem("st_client_secret", client_secret);
+
+    authorizeApp(server, client_id);
+  }
+};
+
+export const authorizeApp = (server: string, client_id: string) => {
+  const authorizeUrl = new URL(`https://${server}/oauth/authorize`);
+  authorizeUrl.searchParams.append("response_type", "code");
+  authorizeUrl.searchParams.append("client_id", client_id);
+  authorizeUrl.searchParams.append("redirect_uri", callback_url);
+  window.location.href = authorizeUrl.toString();
+};
+
+export const getToken = async (code: string) => {
+  const { server, clientId, clientSecret } = getAuthInfo();
+
+  const request = await fetch(`https://${server}/oauth/token`, {
+    method: "POST",
+    body: new URLSearchParams({
+      grant_type: "authorization_code",
+      code,
+      client_id: clientId,
+      client_secret: clientSecret,
+      redirect_uri: callback_url,
+    }),
+  });
+
+  if (request.ok) {
+    const { access_token } = await request.json();
+    localStorage.setItem("st_token", access_token);
+  }
+
+  return;
+};
+
+export const logout = async () => {
+  const { server, token } = getAuthInfo();
+
+  if (server) {
+    const client_id = localStorage.getItem("st_client_id")!;
+    const client_secret = localStorage.getItem("st_client_secret")!;
+
+    await fetch(`https://${server}/oauth/revoke`, {
+      method: "POST",
+      body: new URLSearchParams({ client_id, client_secret, token }),
+    }).catch((e) => console.error(e));
+  }
+
+  localStorage.clear();
+};
