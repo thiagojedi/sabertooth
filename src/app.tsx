@@ -5,7 +5,7 @@ import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import { getAuthInfo } from "./application/auth";
 import { HomeTimeline } from "./modules/timelines/home.tsx";
 import { LoginForm } from "./application/auth/login-form.tsx";
-import {CurrentUserAvatar} from "./modules/users";
+import { CurrentUserAvatar } from "./modules/users";
 
 export const App = () => {
   const { server, token } = getAuthInfo();
@@ -28,7 +28,7 @@ export const App = () => {
           <Route
             path="/"
             element={
-              <Layout startSlot={<CurrentUserAvatar/>}>
+              <Layout startSlot={<CurrentUserAvatar />}>
                 <Outlet />
               </Layout>
             }

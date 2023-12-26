@@ -1,13 +1,13 @@
 import { FunctionalComponent } from "preact";
 import { useState } from "preact/hooks";
 import { authApp } from "./index.ts";
-import {useAuthCallback} from "./use-auth-callback.tsx";
+import { useAuthCallback } from "./use-auth-callback.tsx";
 
 export const LoginForm: FunctionalComponent = () => {
-  useAuthCallback()
-    
-    const [server, setServer] = useState("");
-  
+  useAuthCallback();
+
+  const [server, setServer] = useState("");
+
   return (
     <div
       style={{

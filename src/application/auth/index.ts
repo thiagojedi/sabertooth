@@ -1,7 +1,8 @@
 const callback_url = import.meta.env.VITE_OAUTH_CALLBACK;
 
 export const getAuthInfo = () => ({
-  server: import.meta.env.VITE_SERVER ?? localStorage.getItem("instance_server"),
+  server:
+    import.meta.env.VITE_SERVER ?? localStorage.getItem("instance_server"),
   token: import.meta.env.VITE_TOKEN ?? localStorage.getItem("st_token")!,
   clientId: localStorage.getItem("st_client_id")!,
   clientSecret: localStorage.getItem("st_client_secret")!,
