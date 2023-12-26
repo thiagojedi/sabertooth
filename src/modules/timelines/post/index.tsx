@@ -1,10 +1,10 @@
 import { FunctionalComponent } from "preact";
 import { PostHeader } from "../../../common/components/post-header";
-import { PostFooter } from "../../../common/components/post-footer";
 
 import styles from "./styles.module.css";
 import { MediaCarousel } from "../../../common/components/media-carousel";
 import { emojiText } from "../../../common/helpers/emoji-text.ts";
+import { PostActions } from "../post-actions";
 
 export const Post: FunctionalComponent<{ status: Status }> = ({ status }) => {
   const consideredStatus = status.reblog ?? status;
@@ -52,7 +52,7 @@ export const Post: FunctionalComponent<{ status: Status }> = ({ status }) => {
           content
         )}
       </div>
-      <PostFooter status={consideredStatus} />
+      <PostActions status={consideredStatus} />
     </section>
   );
 };
