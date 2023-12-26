@@ -1,29 +1,19 @@
-import { useHomeTimeline } from "./hooks";
-import { getAuthInfo } from "../../application/auth";
+import { usePublicTimeline } from "./hooks";
+import { Post } from "./post";
 
 export const PublicTimeline = () => {
-  const { statusList, error } = useHomeTimeline();
+  const { statusList } = usePublicTimeline();
 
-  if (error) {
-    return <p>{error}</p>;
-  }
   return (
-    <pre>
-      <code>
-        {JSON.stringify({ statusList, token: getAuthInfo() }, undefined, 2)}
-      </code>
-    </pre>
+    <>
+      {statusList
+        .filter((status) => status.media_attachments.length === 0) // Remove when handling media
+        .map((status) => (
+          <>
+            <Post key={status.id} status={status} />
+            <hr />
+          </>
+        ))}
+    </>
   );
-  // return (
-  //   <>
-  //     {statusList
-  //       .filter((status) => status.media_attachments.length === 0) // Remove when handling media
-  //       .map((status) => (
-  //         <>
-  //           <Post key={status.id} status={status} />
-  //           <hr />
-  //         </>
-  //       ))}
-  //   </>
-  // );
 };
