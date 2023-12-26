@@ -17,7 +17,7 @@ type Status = {
   muted: boolean;
   bookmarked: boolean;
   content: string;
-  reblog: null;
+  reblog: Status |null;
   application: {
     name: string;
     website: null;
