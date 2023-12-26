@@ -2,12 +2,18 @@ import { FunctionalComponent } from "preact";
 
 import styles from "./styles.module.css";
 
-export const PostFooter: FunctionalComponent<{ status: Status }> = (props) => {
+export const PostFooter: FunctionalComponent<{ status: Status }> = ({
+  status,
+}) => {
   return (
     <footer className={styles.footer}>
-      <span>Replies {props.status.replies_count}</span>
-      <span>Favs {props.status.favourites_count}</span>
-      <span>Boosts {props.status.reblogs_count}</span>{" "}
+      <button onClick={() => {}}>↩ {status.replies_count}</button>
+      <button onClick={() => {}}>
+        {status.favourited ? "★" : "☆"} {status.favourites_count}
+      </button>
+      <button onClick={() => {}}>
+        {status.reblogged ? "🔂" : "🔁"} {status.reblogs_count}
+      </button>
     </footer>
   );
 };
