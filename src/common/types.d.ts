@@ -17,13 +17,13 @@ type Status = {
   muted: boolean;
   bookmarked: boolean;
   content: string;
-  reblog: Status |null;
+  reblog: Status | null;
   application: {
     name: string;
     website: null;
   };
   account: Account;
-  media_attachments: [];
+  media_attachments: MediaAttachment[];
   mentions: [];
   tags: [];
   emojis: [];
@@ -51,7 +51,7 @@ type Account = {
   following_count: number;
   statuses_count: number;
   last_status_at: string;
-  emojis: [];
+  emojis: Emoji[];
   fields: [
     {
       name: string;
@@ -75,4 +75,109 @@ type Card = {
   height: number;
   image: null;
   embed_url: string;
+};
+
+type MediaAttachment = {
+  id: string;
+  url: string;
+  preview_url: string;
+  remote_url: string | null;
+  text_url: string;
+  description: string | null;
+  blurhash: string | null;
+} & (
+  | {
+      type: "image";
+      meta: {
+        original: {
+          width: number;
+          height: number;
+          size: string;
+          aspect: number;
+        };
+        small: {
+          width: number;
+          height: number;
+          size: string;
+          aspect: number;
+        };
+        focus: {
+          x: number;
+          y: number;
+        };
+      };
+    }
+  | {
+      type: "video";
+      meta: {
+        length: string;
+        duration: number;
+        fps: number;
+        size: string;
+        width: number;
+        height: number;
+        aspect: number;
+        audio_encode: string;
+        audio_bitrate: string;
+        audio_channels: string;
+        original: {
+          width: number;
+          height: number;
+          frame_rate: string;
+          duration: number;
+          bitrate: number;
+        };
+        small: {
+          width: number;
+          height: number;
+          size: string;
+          aspect: number;
+        };
+      };
+    }
+  | {
+      type: "audio";
+      meta: {
+        length: string;
+        duration: number;
+        audio_encode: string;
+        audio_bitrate: string;
+        audio_channels: string;
+        original: {
+          duration: number;
+          bitrate: number;
+        };
+      };
+    }
+  | {
+      type: "gifv";
+      meta: {
+        length: string;
+        duration: number;
+        fps: number;
+        size: string;
+        width: number;
+        height: number;
+        aspect: number;
+        original: {
+          width: number;
+          height: number;
+          frame_rate: string;
+          duration: number;
+          bitrate: number;
+        };
+        small: {
+          width: number;
+          height: number;
+          size: string;
+          aspect: number;
+        };
+      };
+    }
+);
+
+type Emoji = {
+  shortcode: string;
+  url: string;
+  static_url: string;
 };

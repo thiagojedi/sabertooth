@@ -30,3 +30,8 @@ a .ellipsis {
 a .invisible {
   display: none;
 }
+
+img.emoji {
+  max-height: 1em;
+  max-width: 1em;
+} 

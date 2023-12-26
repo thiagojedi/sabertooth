@@ -1,0 +1,25 @@
+.image {
+  max-height: 40vh;
+  max-width: 80vw;
+  margin: 0 0.5rem;
+}
+
+.no-description {
+  border: 1px solid red;
+}
+
+.carousel {
+  display: flex;
+  overflow: scroll;
+  max-width: 100%;
+  gap: 0.5rem;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.video {
+  width: 100vw;
+  height: 40vh;
+  background-color: black;
+  border-radius: 0.5rem;
+}

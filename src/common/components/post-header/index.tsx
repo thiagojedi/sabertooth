@@ -12,7 +12,10 @@ export const PostHeader: FunctionComponent<{
     <header className={style.header}>
       <Avatar className={style.avatar} url={props.url} name={props.name} />
 
-      <span className={style.name}>{props.name}</span>
+      <span
+        className={style.name}
+        dangerouslySetInnerHTML={{ __html: props.name }}
+      />
       <small className={style.handle}>@{props.handle}</small>
     </header>
   );
