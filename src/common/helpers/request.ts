@@ -1,8 +1,7 @@
 import { getAuthInfo } from "../../application/auth";
+import { RequestError } from "../errors.ts";
 
-export const getFetcher = () => {
-  const { server, token } = getAuthInfo();
-
+export const getFetcher = ({ server, token } = getAuthInfo()) => {
   if (!server) {
     return undefined;
   }
@@ -12,7 +11,7 @@ export const getFetcher = () => {
     method: "GET" | "POST" = "GET",
     data?: Record<string, string>,
   ) => {
-    const request = await fetch(`https://${server}${key}`, {
+    const response = await fetch(`https://${server}${key}`, {
       method,
       headers: {
         Authorization: token && `Bearer ${token}`,
@@ -20,11 +19,10 @@ export const getFetcher = () => {
       body: data && new URLSearchParams(data),
     });
 
-    if (request.ok) {
-      return request.json();
+    if (response.ok) {
+      return response.json();
     }
 
-    const response = await request.json();
-    throw new Error(response.error);
+    throw new RequestError(response.status, await response.json());
   };
 };

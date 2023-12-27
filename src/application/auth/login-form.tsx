@@ -9,21 +9,30 @@ export const LoginForm: FunctionalComponent = () => {
   const [server, setServer] = useState("");
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "0.5rem",
-        alignItems: "stretch",
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        return authApp(server);
       }}
     >
-      <input
-        type="text"
-        value={server}
-        autoCapitalize="off"
-        onChange={(e) => setServer(e.currentTarget.value)}
-      />
-      <button onClick={() => authApp(server)}>Login</button>
-    </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.5rem",
+          alignItems: "stretch",
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Server URL (i.e. mastodon.social)"
+          value={server}
+          autoCapitalize="off"
+          onChange={(e) => setServer(e.currentTarget.value)}
+        />
+        <br />
+        <input type="submit" value="Login" />
+      </div>
+    </form>
   );
 };

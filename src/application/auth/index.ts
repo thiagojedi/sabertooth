@@ -2,8 +2,10 @@ const callback_url = import.meta.env.VITE_OAUTH_CALLBACK;
 
 export const getAuthInfo = () => ({
   server:
-    import.meta.env.VITE_SERVER ?? localStorage.getItem("instance_server"),
-  token: import.meta.env.VITE_TOKEN ?? localStorage.getItem("st_token")!,
+    (import.meta.env.VITE_SERVER as string) ??
+    localStorage.getItem("instance_server"),
+  token:
+    (import.meta.env.VITE_TOKEN as string) ?? localStorage.getItem("st_token")!,
   clientId: localStorage.getItem("st_client_id")!,
   clientSecret: localStorage.getItem("st_client_secret")!,
 });
@@ -36,6 +38,7 @@ export const authorizeApp = (server: string, client_id: string) => {
   authorizeUrl.searchParams.append("response_type", "code");
   authorizeUrl.searchParams.append("client_id", client_id);
   authorizeUrl.searchParams.append("redirect_uri", callback_url);
+  authorizeUrl.searchParams.append("scope", "read write");
   window.location.href = authorizeUrl.toString();
 };
 
@@ -45,8 +48,8 @@ export const getToken = async (code: string) => {
   const request = await fetch(`https://${server}/oauth/token`, {
     method: "POST",
     body: new URLSearchParams({
-      grant_type: "authorization_code",
       code,
+      grant_type: "authorization_code",
       client_id: clientId,
       client_secret: clientSecret,
       redirect_uri: callback_url,
