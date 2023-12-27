@@ -1,17 +1,21 @@
 import { FunctionalComponent } from "preact";
 
 import styles from "./styles.module.css";
+import { useState } from "preact/hooks";
 
 export const MediaCarousel: FunctionalComponent<{
   media: MediaAttachment[];
 }> = (props) => {
+  const [imagePreview, setImagePreview] = useState<MediaAttachment>();
+
   return (
     <div className={styles.carousel}>
       {props.media.map((media) => {
-        if (media.type === "image") {
+        if (media.type === "image" || media.type === "gifv") {
           const text = media.description ?? "media without description";
           return (
             <img
+              onClick={() => setImagePreview(media)}
               className={[
                 styles.image,
                 media.description ? "" : styles["no-description"],
@@ -21,7 +25,9 @@ export const MediaCarousel: FunctionalComponent<{
               title={text}
             />
           );
-        } else if (media.type === "video") {
+        }
+
+        if (media.type === "video") {
           return (
             <video
               controls
@@ -35,16 +41,34 @@ export const MediaCarousel: FunctionalComponent<{
             >
               {media.description}
               {media.remote_url && (
-                <a href={media.remote_url} alt={""}>
-                  Download Video
-                </a>
+                <a href={media.remote_url}>Download Video</a>
               )}
             </video>
           );
-        } else {
-          return null;
+        }
+
+        if (media.type === "audio") {
+          return (
+            <audio controls src={media.url}>
+              {media.description}
+              {media.remote_url && (
+                <a href={media.remote_url}>Download Audio</a>
+              )}
+            </audio>
+          );
         }
       })}
+      {imagePreview && (
+        <div
+          onClick={() => setImagePreview(undefined)}
+          className={styles.backdrop}
+        >
+          <img
+            alt={imagePreview.description ?? "image"}
+            src={imagePreview.preview_url}
+          />
+        </div>
+      )}
     </div>
   );
 };

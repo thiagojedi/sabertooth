@@ -1,20 +1,22 @@
+.no-description {
+  border: 1px solid red;
+}
+
+.carousel {
+  overflow: scroll;
+  max-width: 100%;
+  margin: 0 auto;
+  white-space: nowrap;
+}
+
 .image {
   max-height: 40vh;
   max-width: 80vw;
   margin: 0 0.5rem;
 }
 
-.no-description {
-  border: 1px solid red;
-}
-
-.carousel {
-  display: flex;
-  overflow: scroll;
-  max-width: 100%;
-  gap: 0.5rem;
+.image:first-child {
   margin: 0 auto;
-  width: fit-content;
 }
 
 .video {
@@ -22,4 +24,21 @@
   height: 40vh;
   background-color: black;
   border-radius: 0.5rem;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.backdrop img {
+  max-width: 100vw;
+  max-height: 100vh;
 }

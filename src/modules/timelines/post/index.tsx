@@ -17,7 +17,9 @@ export const Post: FunctionalComponent<{ status: Status }> = ({ status }) => {
         }}
       />
 
-      <MediaCarousel media={consideredStatus.media_attachments} />
+      {consideredStatus.media_attachments.length > 0 && (
+        <MediaCarousel media={consideredStatus.media_attachments} />
+      )}
     </>
   );
 
