@@ -17,7 +17,11 @@ export const useCurrentUser = () => {
       onError: () =>
         logout()
           .then(() => mutate())
-          .then(() => navigate("/")),
+          .then(() =>
+            navigate("/", {
+              replace: true,
+            }),
+          ),
     },
   );
 

@@ -18,7 +18,9 @@ export const useAuthCallback = () => {
   useEffect(() => {
     const { token } = getAuthInfo();
     if (token) {
-      navigate("/home");
+      navigate("/home", {
+        replace: true,
+      });
     }
   }, []);
 };
