@@ -11,9 +11,10 @@
     }
   },
   "rules": {
-    "react/react-in-jsx-scope": "off",
     "react/jsx-no-undef": "off",
     "react/jsx-fragments": ["warn", "syntax"],
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
     "import/order": [
       "warn",
       {

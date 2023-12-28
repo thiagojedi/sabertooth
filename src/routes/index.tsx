@@ -7,10 +7,10 @@ import {
 
 import { Layout } from "../application/layout";
 import { CurrentUserAvatar } from "../modules/users";
-import { HomeTimeline } from "../modules/timelines/home.tsx";
-import { PublicTimeline } from "../modules/timelines/public.tsx";
 
 import Login from "./login.tsx";
+import HomeRoute from "./home.tsx";
+import PublicRoute from "./public.tsx";
 
 const IndexRoute = () => (
   <HashRouter>
@@ -24,8 +24,8 @@ const IndexRoute = () => (
         }
       >
         <Route index element={<Login />} />
-        <Route path="/home" element={<HomeTimeline />} />
-        <Route path="/public" element={<PublicTimeline />} />
+        <Route path="/home" element={<HomeRoute />} />
+        <Route path="/public" element={<PublicRoute />} />
       </Route>
     </ReactRoutes>
   </HashRouter>

@@ -1,27 +1,28 @@
 import { FunctionalComponent } from "preact";
-import { PostHeader } from "../../../common/components/post-header";
 
-import styles from "./styles.module.css";
+import { PostHeader } from "../../../common/components/post-header";
 import { MediaCarousel } from "../../../common/components/media-carousel";
 import { emojiText } from "../../../common/helpers/emoji-text.ts";
 import { PostActions } from "../post-actions";
 
+import styles from "./styles.module.css";
+
+const Content = ({ status }: { status: Status }) => (
+  <>
+    <div
+      dangerouslySetInnerHTML={{
+        __html: emojiText(status.content, status.emojis),
+      }}
+    />
+
+    {status.media_attachments.length > 0 && (
+      <MediaCarousel media={status.media_attachments} />
+    )}
+  </>
+);
+
 export const Post: FunctionalComponent<{ status: Status }> = ({ status }) => {
   const consideredStatus = status.reblog ?? status;
-
-  const content = (
-    <>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: emojiText(consideredStatus.content, consideredStatus.emojis),
-        }}
-      />
-
-      {consideredStatus.media_attachments.length > 0 && (
-        <MediaCarousel media={consideredStatus.media_attachments} />
-      )}
-    </>
-  );
 
   return (
     <section key={status.id} className={styles.post}>
@@ -48,10 +49,10 @@ export const Post: FunctionalComponent<{ status: Status }> = ({ status }) => {
         {status.spoiler_text ? (
           <details>
             <summary>{status.spoiler_text}</summary>
-            {content}
+            <Content status={consideredStatus} />
           </details>
         ) : (
-          content
+          <Content status={consideredStatus} />
         )}
       </div>
       <PostActions status={consideredStatus} />
