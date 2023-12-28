@@ -9,13 +9,15 @@ type Props = { user: Account };
 
 export const UserProfile: FunctionalComponent<Props> = ({ user }) => (
   <>
-    <img className={styles.header} src={user.header_static} alt="" />
+    <div className={styles.header}>
+      <img src={user.header_static} alt="" />
+    </div>
     <header className={styles.profile}>
       <div className={styles.avatar}>
         <Avatar name={user.display_name} url={user.avatar_static} />
       </div>
       <div className={styles.name}>
-        <h1
+        <h2
           dangerouslySetInnerHTML={{
             __html: emojiText(user.display_name, user.emojis),
           }}

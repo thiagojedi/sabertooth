@@ -5,6 +5,7 @@ import useSWR from "swr";
 import { UserProfile } from "../modules/users/profile";
 import { useUserTimeline } from "../modules/timelines/hooks";
 import { Timeline } from "../modules/timelines/timeline.tsx";
+import { ErrorLog } from "../common/components/error";
 
 const ProfileRoute: FunctionalComponent = () => {
   const { acct } = useParams();
@@ -17,6 +18,10 @@ const ProfileRoute: FunctionalComponent = () => {
 
   const { statusList } = useUserTimeline(data?.id);
 
+  if (error) {
+    return <ErrorLog error={error} />;
+  }
+
   return (
     <>
       {data && <UserProfile user={data} />}
@@ -24,10 +29,6 @@ const ProfileRoute: FunctionalComponent = () => {
       <hr />
 
       <Timeline statusList={statusList} />
-
-      <pre>
-        <code>{JSON.stringify(error || data, undefined, 2)}</code>
-      </pre>
     </>
   );
 };
