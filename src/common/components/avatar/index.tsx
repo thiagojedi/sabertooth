@@ -1,4 +1,5 @@
 import { FunctionalComponent } from "preact";
+
 import style from "./styles.module.css";
 
 export const Avatar: FunctionalComponent<{

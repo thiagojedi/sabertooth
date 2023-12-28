@@ -26,7 +26,7 @@ type Status = {
   media_attachments: MediaAttachment[];
   mentions: [];
   tags: [];
-  emojis: [];
+  emojis: Emoji[];
   card: Card;
   poll: null;
 };

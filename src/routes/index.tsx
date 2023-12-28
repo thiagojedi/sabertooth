@@ -11,6 +11,7 @@ import { CurrentUserAvatar } from "../modules/users";
 import Login from "./login.tsx";
 import HomeRoute from "./home.tsx";
 import PublicRoute from "./public.tsx";
+import ProfileRoute from "./profile.tsx";
 
 const IndexRoute = () => (
   <HashRouter>
@@ -26,6 +27,7 @@ const IndexRoute = () => (
         <Route index element={<Login />} />
         <Route path="/home" element={<HomeRoute />} />
         <Route path="/public" element={<PublicRoute />} />
+        <Route path="/:acct" element={<ProfileRoute />} />
       </Route>
     </ReactRoutes>
   </HashRouter>

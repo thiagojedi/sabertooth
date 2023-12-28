@@ -21,6 +21,8 @@ const ProfileRoute: FunctionalComponent = () => {
     <>
       {data && <UserProfile user={data} />}
 
+      <hr />
+
       <Timeline statusList={statusList} />
 
       <pre>

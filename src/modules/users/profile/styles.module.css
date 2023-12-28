@@ -1,0 +1,67 @@
+.profile {
+  display: grid;
+  grid-column-gap: 0.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    ". avatar ."
+    "name name name"
+    "info info info"
+    "start middle end";
+  align-items: end;
+  padding: 0.5rem;
+}
+
+.header {
+  position: absolute;
+  z-index: -1;
+  height: 4rem;
+  width: 100vw;
+  object-fit: cover;
+}
+
+.avatar {
+  grid-area: avatar;
+}
+
+.name {
+  grid-area: name;
+  text-align: center;
+}
+
+.name h1 {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  margin: 0;
+}
+
+.info {
+  grid-area: info;
+}
+
+.info summary {
+  list-style: none;
+  text-align: center;
+  text-transform: lowercase;
+  cursor: pointer;
+}
+
+.followers {
+  grid-area: start;
+}
+
+.following {
+  grid-area: middle;
+}
+
+.stats {
+  grid-area: end;
+}
+
+.followers,
+.following,
+.stats {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
