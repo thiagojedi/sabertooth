@@ -1,0 +1,35 @@
+{
+  "extends": ["@agilecontent/eslint-config/frontend"],
+  "plugins": ["import"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "typescript": true,
+      "node": true
+    }
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-no-undef": "off",
+    "react/jsx-fragments": ["warn", "syntax"],
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "unknown",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "newlines-between": "always"
+      }
+    ]
+  }
+}
