@@ -24,7 +24,7 @@ type Status = {
   };
   account: Account;
   media_attachments: MediaAttachment[];
-  mentions: [];
+  mentions: Mention[];
   tags: [];
   emojis: Emoji[];
   card: Card;
@@ -180,4 +180,12 @@ type Emoji = {
   shortcode: string;
   url: string;
   static_url: string;
+};
+
+type Mention = {
+  acct: string;
+
+  id: string;
+  url: string;
+  username: string;
 };

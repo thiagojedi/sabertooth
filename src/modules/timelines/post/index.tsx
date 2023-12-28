@@ -4,22 +4,27 @@ import { PostHeader } from "../../../common/components/post-header";
 import { MediaCarousel } from "../../../common/components/media-carousel";
 import { emojiText } from "../../../common/helpers/emoji-text.ts";
 import { PostActions } from "../post-actions";
+import { useMentionLinks } from "../hooks/use-mention-links.ts";
 
 import styles from "./styles.module.css";
 
-const Content = ({ status }: { status: Status }) => (
-  <>
-    <div
-      dangerouslySetInnerHTML={{
-        __html: emojiText(status.content, status.emojis),
-      }}
-    />
+const Content = ({ status }: { status: Status }) => {
+  const ref = useMentionLinks<HTMLDivElement>(status.mentions);
+  return (
+    <>
+      <div
+        ref={ref}
+        dangerouslySetInnerHTML={{
+          __html: emojiText(status.content, status.emojis),
+        }}
+      />
 
-    {status.media_attachments.length > 0 && (
-      <MediaCarousel media={status.media_attachments} />
-    )}
-  </>
-);
+      {status.media_attachments.length > 0 && (
+        <MediaCarousel media={status.media_attachments} />
+      )}
+    </>
+  );
+};
 
 export const Post: FunctionalComponent<{ status: Status }> = ({ status }) => {
   const consideredStatus = status.reblog ?? status;

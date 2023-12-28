@@ -1,15 +1,21 @@
 import { FunctionComponent } from "preact";
+import { useNavigate } from "react-router-dom";
+
+import { Avatar } from "../avatar";
 
 import style from "./styles.module.css";
-import { Avatar } from "../avatar";
 
 export const PostHeader: FunctionComponent<{
   url: string;
   name: string;
   handle: string;
 }> = (props) => {
+  const navigate = useNavigate();
   return (
-    <header className={style.header}>
+    <header
+      className={style.header}
+      onClick={() => navigate("/@" + props.handle)}
+    >
       <Avatar className={style.avatar} url={props.url} name={props.name} />
 
       <span
