@@ -1,5 +1,5 @@
-export const ErrorLog = (props: { error: Error }) => (
+export const DebugLog = (props: { info?: object }) => (
   <pre>
-    <code>{JSON.stringify(props.error, undefined, 1)}</code>
+    <code>{JSON.stringify(props.info, undefined, 1)}</code>
   </pre>
 );

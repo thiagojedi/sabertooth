@@ -28,7 +28,7 @@ type Status = {
   tags: [];
   emojis: Emoji[];
   card: Card;
-  poll: null;
+  poll: null | Poll;
 };
 
 type Account = {
@@ -184,8 +184,25 @@ type Emoji = {
 
 type Mention = {
   acct: string;
-
   id: string;
   url: string;
   username: string;
+};
+
+type Poll = {
+  id: string;
+  expires_at: string;
+  expired: boolean;
+  multiple: boolean;
+  votes_count: number;
+  voters_count: null | number;
+  voted: boolean;
+  own_votes: number[];
+  options: Array<{ title: string; votes_count: number }>;
+  emojis: [];
+};
+
+type Context = {
+  ancestors: Status[];
+  descendants: Status[];
 };

@@ -1,30 +1,26 @@
 import { FunctionalComponent } from "preact";
 import { useParams } from "react-router-dom";
-import useSWR from "swr";
 
 import { UserProfile } from "../modules/users/profile";
 import { useUserTimeline } from "../modules/timelines/hooks";
 import { Timeline } from "../modules/timelines/timeline.tsx";
-import { ErrorLog } from "../common/components/error";
+import { DebugLog } from "../common/components/error";
+import { useAccountInfo } from "../modules/users/hooks.ts";
 
 const ProfileRoute: FunctionalComponent = () => {
   const { acct } = useParams();
 
-  const value = acct?.replace("@", "");
+  const { account, error } = useAccountInfo(acct);
 
-  const { data, error } = useSWR<Account>(
-    "/api/v1/accounts/lookup?acct=" + value,
-  );
-
-  const { statusList } = useUserTimeline(data?.id);
+  const { statusList } = useUserTimeline(account?.id);
 
   if (error) {
-    return <ErrorLog error={error} />;
+    return <DebugLog info={error} />;
   }
 
   return (
     <>
-      {data && <UserProfile user={data} />}
+      {account && <UserProfile user={account} />}
 
       <hr />
 
