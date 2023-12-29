@@ -15,6 +15,7 @@ export const getFetcher = ({ server, token } = getAuthInfo()) => {
       method,
       headers: {
         Authorization: token && `Bearer ${token}`,
+        Accept: "application/json, text/plain, */*",
       },
       body: data && new URLSearchParams(data),
     });

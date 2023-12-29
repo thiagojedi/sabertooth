@@ -1,6 +1,7 @@
 import { FunctionalComponent } from "preact";
-import { PostFooter } from "../../../common/components/post-footer";
 import { useCallback, useState } from "preact/hooks";
+
+import { PostFooter } from "../../../common/components/post-footer";
 import {
   boostStatus,
   favouriteStatus,
@@ -14,12 +15,18 @@ export const PostActions: FunctionalComponent<{ status: Status }> = (props) => {
   const handleClick = useCallback(
     (e: "fav" | "boost" | "reply", value?: boolean) => {
       let request;
-      if (e === "fav") request = value ? favouriteStatus : unFavouriteStatus;
-      if (e === "boost") request = value ? boostStatus : unBoostStatus;
+      if (e === "fav") {
+        request = value ? favouriteStatus : unFavouriteStatus;
+      }
+      if (e === "boost") {
+        request = value ? boostStatus : unBoostStatus;
+      }
 
-      if (request) request(status.id).then(setStatus);
+      if (request) {
+        request(status.id).then(setStatus);
+      }
     },
-    [],
+    [status.id],
   );
 
   return <PostFooter status={status} onClick={handleClick} />;

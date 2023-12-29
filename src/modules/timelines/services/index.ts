@@ -11,7 +11,12 @@ export const unFavouriteStatus = (statusId: string) =>
   request(`/api/v1/statuses/${statusId}/unfavourite`);
 
 export const boostStatus = (statusId: string) =>
-  request(`api/v1/statuses/${statusId}/reblog`);
+  request(`/api/v1/statuses/${statusId}/reblog`);
 
 export const unBoostStatus = (statusId: string) =>
-  request(`api/v1/statuses/${statusId}/unreblog`);
+  request(`/api/v1/statuses/${statusId}/unreblog`);
+
+export const voteOnPoll = (pollId: string, answers: string[]): Promise<Poll> =>
+  fetcher(`/api/v1/polls/${pollId}/votes`, "POST", {
+    choices: answers.join(","),
+  });

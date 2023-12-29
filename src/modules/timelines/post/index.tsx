@@ -4,7 +4,8 @@ import { PostHeader } from "../../../common/components/post-header";
 import { MediaCarousel } from "../../../common/components/media-carousel";
 import { emojiText } from "../../../common/helpers/emoji-text.ts";
 import { PostActions } from "../post-actions";
-import { useMentionLinks } from "../hooks/use-mention-links.ts";
+import { useMentionLinks } from "../hooks";
+import { PostPoll } from "../post-poll";
 
 import styles from "./styles.module.css";
 
@@ -22,6 +23,8 @@ const Content = ({ status }: { status: Status }) => {
       {status.media_attachments.length > 0 && (
         <MediaCarousel media={status.media_attachments} />
       )}
+
+      {status.poll && <PostPoll poll={status.poll} />}
     </>
   );
 };

@@ -3,7 +3,6 @@ import useSWR from "swr";
 
 import { DebugLog } from "../common/components/error";
 import { Timeline } from "../modules/timelines/timeline.tsx";
-import { Post } from "../modules/timelines/post";
 import { RequestError } from "../common/errors.ts";
 
 const PostRoute = () => {
@@ -27,8 +26,7 @@ const PostRoute = () => {
 
   return (
     <>
-      {status && <Post status={status} />}
-      <hr />
+      <Timeline statusList={status ? [status] : []} />
       <Timeline statusList={context?.descendants ?? []} />
     </>
   );

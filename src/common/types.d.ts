@@ -199,7 +199,7 @@ type Poll = {
   voted: boolean;
   own_votes: number[];
   options: Array<{ title: string; votes_count: number }>;
-  emojis: [];
+  emojis: Emoji[];
 };
 
 type Context = {
