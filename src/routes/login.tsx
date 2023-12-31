@@ -1,10 +1,11 @@
 import { Fragment } from "preact";
 
 import { LoginForm } from "../application/auth/login-form.tsx";
+import { WelcomeInfo } from "../application/layout/welcome-info/index.tsx";
 
 const Login = () => (
   <Fragment>
-    {/*TODO: Add app info and login instructions*/}
+    <WelcomeInfo />
     <LoginForm />
   </Fragment>
 );

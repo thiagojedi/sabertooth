@@ -1,0 +1,12 @@
+.welcome {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  padding: 1rem 0 0;
+}
+
+.logo {
+  width: 4rem;
+}
