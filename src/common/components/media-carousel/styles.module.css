@@ -1,5 +1,5 @@
-.no-description {
-  border: 1px solid red;
+.noDescription {
+  border: 2px solid red;
 }
 
 .carousel {
@@ -15,12 +15,8 @@
   margin: 0 0.5rem;
 }
 
-.image:first-child {
-  margin: 0 auto;
-}
-
 .video {
-  width: 100vw;
+  width: 80vw;
   height: 40vh;
   background-color: black;
   border-radius: 0.5rem;

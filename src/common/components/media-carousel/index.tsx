@@ -1,7 +1,7 @@
 import { FunctionalComponent } from "preact";
+import { useState } from "preact/hooks";
 
 import styles from "./styles.module.css";
-import { useState } from "preact/hooks";
 
 export const MediaCarousel: FunctionalComponent<{
   media: MediaAttachment[];
@@ -11,14 +11,15 @@ export const MediaCarousel: FunctionalComponent<{
   return (
     <div className={styles.carousel}>
       {props.media.map((media) => {
-        if (media.type === "image" || media.type === "gifv") {
+        if (media.type === "image") {
           const text = media.description ?? "media without description";
           return (
             <img
+              key={media.id}
               onClick={() => setImagePreview(media)}
               className={[
                 styles.image,
-                media.description ? "" : styles["no-description"],
+                media.description ? "" : styles.noDescription,
               ].join(" ")}
               src={media.preview_url}
               alt={text}
@@ -27,14 +28,15 @@ export const MediaCarousel: FunctionalComponent<{
           );
         }
 
-        if (media.type === "video") {
+        if (media.type === "video" || media.type === "gifv") {
           return (
             <video
+              key={media.id}
               controls
               allowFullScreen
               className={[
                 styles.video,
-                media.description ? "" : styles["no-description"],
+                media.description ? "" : styles.noDescription,
               ].join(" ")}
               src={media.url}
               poster={media.preview_url}
@@ -49,7 +51,7 @@ export const MediaCarousel: FunctionalComponent<{
 
         if (media.type === "audio") {
           return (
-            <audio controls src={media.url}>
+            <audio key={media.id} controls src={media.url}>
               {media.description}
               {media.remote_url && (
                 <a href={media.remote_url}>Download Audio</a>
