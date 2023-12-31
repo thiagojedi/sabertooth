@@ -27,30 +27,32 @@ export const UserProfile: FunctionalComponent<Props> = ({ user }) => (
 
       <details className={styles.info}>
         <summary>View Info</summary>
-        <span
+        <p
           dangerouslySetInnerHTML={{
             __html: emojiText(user.note, user.emojis),
           }}
         />
       </details>
-      <div className={styles.followers}>
-        <b>
-          <small>Followers</small>
-        </b>
-        <span>{user.followers_count}</span>
-      </div>
-      <div className={styles.following}>
-        <b>
-          <small>Following</small>
-        </b>
-        <span>{user.following_count}</span>
-      </div>
-      <div className={styles.stats}>
-        <b>
-          <small>Toots</small>
-        </b>
-        <span>{user.statuses_count}</span>
-      </div>
+      <p className={styles.stats}>
+        <div className={styles.followers}>
+          <b>
+            <small>Followers</small>
+          </b>
+          <span>{user.followers_count}</span>
+        </div>
+        <div className={styles.following}>
+          <b>
+            <small>Following</small>
+          </b>
+          <span>{user.following_count}</span>
+        </div>
+        <div className={styles.toots}>
+          <b>
+            <small>Toots</small>
+          </b>
+          <span>{user.statuses_count}</span>
+        </div>
+      </p>
     </header>
   </>
 );

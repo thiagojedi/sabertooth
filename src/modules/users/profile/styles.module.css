@@ -1,12 +1,6 @@
 .profile {
-  display: grid;
-  grid-gap: 0.5rem;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-areas:
-    ". avatar ."
-    "name name name"
-    "info info info"
-    "start middle end";
+  display: flex;
+  flex-direction: column;
   padding: 0.5rem;
 }
 
@@ -24,19 +18,19 @@
 }
 
 .avatar {
-  grid-area: avatar;
   height: 4rem;
   text-align: center;
 }
 
 .name {
-  grid-area: name;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .name h2 {
   display: inline-block;
-  margin-top: 0;
+  margin: 0 auto 0.5rem;
 }
 
 .name small {
@@ -44,7 +38,7 @@
 }
 
 .info {
-  grid-area: info;
+  display: block;
 }
 
 .info summary {
@@ -54,21 +48,15 @@
   cursor: pointer;
 }
 
-.followers {
-  grid-area: start;
-}
-
-.following {
-  grid-area: middle;
-}
-
 .stats {
-  grid-area: end;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0;
 }
 
 .followers,
 .following,
-.stats {
+.toots {
   text-align: center;
   display: flex;
   flex-direction: column;
