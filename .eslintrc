@@ -15,6 +15,13 @@
     "react/jsx-fragments": ["warn", "syntax"],
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
+    "import/extensions": [
+      "error",
+      "always",
+      {
+        "ignorePackages": true
+      }
+    ],
     "import/order": [
       "warn",
       {
