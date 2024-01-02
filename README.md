@@ -1,6 +1,8 @@
+<img title="Sabertooth Logo" alt="A black circle with two stylized sabers with yellow guards on the center. The sabers evoke the appearance of elephant tusks." src="https://thiagojedi.github.io/sabertooth/logo.svg" height="200px" width="200px"  />
+
 # Sabertooth
 
-Sabertooth is an experimental app with mainly three objectives:
+Sabertooth is an experimental app I've created with mainly three objectives:
 
 1. Learn about the Mastodon API
 2. Showcase my
@@ -9,6 +11,8 @@ Sabertooth is an experimental app with mainly three objectives:
 
 I current test the interface on a Nokia 8110 4G (a.k.a. the Bananaphone), with a total screen resolution of 240x320
 pixels.
+
+<img title="Nokia 8110 4G" alt="A color photography of a hand holding the phone. The phone is yellow, with black bezels around the screen. It has numeric physical keyboard and a small screen." src="https://thiagojedi.github.io/sabertooth/screen_shot.jpg" height="200px" width="200px" />
 
 ## Features
 
