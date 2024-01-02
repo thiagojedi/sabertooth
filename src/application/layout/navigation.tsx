@@ -2,6 +2,8 @@ import { FunctionalComponent } from "preact";
 import { NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "preact/hooks";
 
+import { getAuthInfo } from "../auth/index.ts";
+
 import styles from "./styles.module.css";
 
 export const Navigation: FunctionalComponent = () => {
@@ -10,6 +12,12 @@ export const Navigation: FunctionalComponent = () => {
   useEffect(() => {
     setShow(false);
   }, [location]);
+
+  const { server } = getAuthInfo();
+
+  if (!server) {
+    return null;
+  }
 
   return (
     <nav role="navigation">
