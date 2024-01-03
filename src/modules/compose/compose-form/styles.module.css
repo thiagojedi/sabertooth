@@ -1,0 +1,16 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0.5rem;
+}
+
+.body {
+  height: 5rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}

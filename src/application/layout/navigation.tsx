@@ -36,6 +36,9 @@ export const Navigation: FunctionalComponent = () => {
         <li>
           <NavLink to={"/public"}>public</NavLink>
         </li>
+        <li>
+          <NavLink to={"/compose"}>post</NavLink>
+        </li>
       </ul>
     </nav>
   );

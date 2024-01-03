@@ -1,16 +1,19 @@
 import { FunctionalComponent } from "preact";
 import { useCallback, useState } from "preact/hooks";
+import { useNavigate } from "react-router-dom";
 
-import { PostFooter } from "../../../common/components/post-footer";
+import { PostFooter } from "../../../common/components/post-footer/index.tsx";
 import {
   boostStatus,
   favouriteStatus,
   unBoostStatus,
   unFavouriteStatus,
-} from "../services";
+} from "../services/index.ts";
 
 export const PostActions: FunctionalComponent<{ status: Status }> = (props) => {
   const [status, setStatus] = useState(props.status);
+
+  const navigate = useNavigate();
 
   const handleClick = useCallback(
     (e: "fav" | "boost" | "reply", value?: boolean) => {
@@ -22,11 +25,15 @@ export const PostActions: FunctionalComponent<{ status: Status }> = (props) => {
         request = value ? boostStatus : unBoostStatus;
       }
 
+      if (e === "reply") {
+        request = navigate(`/@${status.account.acct}/${status.id}`);
+      }
+
       if (request) {
         request(status.id).then(setStatus);
       }
     },
-    [status.id],
+    [navigate, status.account.acct, status.id],
   );
 
   return <PostFooter status={status} onClick={handleClick} />;

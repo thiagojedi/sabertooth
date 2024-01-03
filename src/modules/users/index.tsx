@@ -1,32 +1,11 @@
-import useSWR from "swr";
-import { logout } from "../../application/auth";
 import { useNavigate } from "react-router-dom";
+
+import { logout } from "../../application/auth/index.ts";
+import { Avatar } from "../../common/components/avatar/index.tsx";
+
+import { useCurrentUser } from "./hooks.ts";
+
 import type { FunctionalComponent } from "preact";
-import { Avatar } from "../../common/components/avatar";
-import { useAppConfig } from "../../application/hooks.ts";
-import type { RequestError } from "../../common/errors.ts";
-
-export const useCurrentUser = () => {
-  const navigate = useNavigate();
-  const { data: config, mutate } = useAppConfig();
-
-  const { data: userData, error } = useSWR<Account>(
-    config?.token && "/api/v1/accounts/verify_credentials",
-    {
-      shouldRetryOnError: (error: RequestError) => error.status !== 401,
-      onError: () =>
-        logout()
-          .then(() => mutate())
-          .then(() =>
-            navigate("/", {
-              replace: true,
-            }),
-          ),
-    },
-  );
-
-  return error ? undefined : userData;
-};
 
 export const CurrentUserAvatar: FunctionalComponent = () => {
   const currentUser = useCurrentUser();
