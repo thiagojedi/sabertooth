@@ -3,11 +3,11 @@ import { useEffect, useRef } from "preact/hooks";
 
 import { emojiText } from "../../helpers/emoji-text.ts";
 
-const OPTION_NAME = "answer";
+const OPTION_NAME = "choices";
 
 type Props = {
   poll: Poll;
-  onVote?: (selection: string[]) => void;
+  onVote?: (selection: FormData) => void;
 };
 
 export const PollOptions: FunctionalComponent<Props> = ({
@@ -30,7 +30,7 @@ export const PollOptions: FunctionalComponent<Props> = ({
     const handleSubmit = (e: SubmitEvent) => {
       e.preventDefault();
       if (form) {
-        onVote(new FormData(form).getAll(OPTION_NAME) as string[]);
+        onVote(new FormData(form));
       }
     };
 

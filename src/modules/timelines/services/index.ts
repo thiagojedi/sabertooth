@@ -2,7 +2,8 @@ import { getFetcher } from "../../../common/helpers/request.ts";
 
 const fetcher = getFetcher()!;
 
-const request = (url: string): Promise<Status> => fetcher(url, "POST");
+const request = <T = Status>(url: string, data?: FormData) =>
+  fetcher<T>(url, "POST", data);
 
 export const favouriteStatus = (statusId: string) =>
   request(`/api/v1/statuses/${statusId}/favourite`);
@@ -16,7 +17,5 @@ export const boostStatus = (statusId: string) =>
 export const unBoostStatus = (statusId: string) =>
   request(`/api/v1/statuses/${statusId}/unreblog`);
 
-export const voteOnPoll = (pollId: string, answers: string[]): Promise<Poll> =>
-  fetcher(`/api/v1/polls/${pollId}/votes`, "POST", {
-    choices: answers.join(","),
-  });
+export const voteOnPoll = (pollId: string, answers: FormData) =>
+  request<Poll>(`/api/v1/polls/${pollId}/votes`, answers);
