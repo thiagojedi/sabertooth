@@ -23,8 +23,8 @@ pixels.
 - [x] View and vote on Polls
 - [x] Like
 - [x] Boost
-- [ ] Create a text post
-- [ ] Reply
+- [x] Create a text post
+- [x] Reply
 
 ## Out of scope
 
