@@ -206,3 +206,11 @@ type Context = {
   ancestors: Status[];
   descendants: Status[];
 };
+
+type MastodonNotification = {
+  id: string;
+  type: "favourite" | "reblog" | "status" | "mention" | "poll" | "update";
+  account: Account;
+  create_at: string;
+  status: Status;
+};

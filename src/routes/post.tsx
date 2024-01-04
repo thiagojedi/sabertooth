@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
+import { useEffect, useRef } from "preact/hooks";
 
 import { DebugLog } from "../common/components/error/index.tsx";
 import { Timeline } from "../modules/timelines/timeline.tsx";
@@ -11,9 +12,17 @@ const PostRoute = () => {
 
   const { data: status, error } = useStatus(postId);
 
-  const { data: context } = useSWR<Context>(() =>
+  const { data: context, isLoading } = useSWR<Context>(() =>
     postId ? `/api/v1/statuses/${postId}/context` : null,
   );
+
+  const replyRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isLoading) {
+      replyRef.current?.scrollIntoView();
+    }
+  }, [isLoading]);
 
   if (error?.status === 404) {
     throw error;
@@ -25,7 +34,10 @@ const PostRoute = () => {
 
   return (
     <>
-      <Timeline statusList={status ? [status] : []} />
+      <Timeline statusList={context?.ancestors ?? []} />
+      <div ref={replyRef}>
+        <Timeline statusList={status ? [status] : []} />
+      </div>
       {status && <ReplyButton id={status.id} />}
       <Timeline statusList={context?.descendants ?? []} />
     </>

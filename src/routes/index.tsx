@@ -14,6 +14,7 @@ import PublicRoute from "./public.tsx";
 import ProfileRoute from "./profile.tsx";
 import PostRoute from "./post.tsx";
 import ComposeRoute from "./compose.tsx";
+import NotificationsRoute from "./notifications.tsx";
 
 const IndexRoute = () => (
   <HashRouter>
@@ -29,6 +30,7 @@ const IndexRoute = () => (
         <Route index element={<Login />} />
         <Route path="/home" element={<HomeRoute />} />
         <Route path="/public" element={<PublicRoute />} />
+        <Route path="/notifications" element={<NotificationsRoute />} />
         <Route path="/:acct" element={<ProfileRoute />} />
         <Route path="/:acct/:postId" element={<PostRoute />} />
         <Route path="/compose/:replyId?" element={<ComposeRoute />} />

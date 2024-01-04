@@ -31,6 +31,9 @@ export const Navigation: FunctionalComponent = () => {
         }}
       >
         <li>
+          <NavLink to={"/notifications"}>notifications</NavLink>
+        </li>
+        <li>
           <NavLink to={"/home"}>home</NavLink>
         </li>
         <li>

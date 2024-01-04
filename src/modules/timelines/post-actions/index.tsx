@@ -9,6 +9,7 @@ import {
   unBoostStatus,
   unFavouriteStatus,
 } from "../services/index.ts";
+import { getPostPath } from "../../../common/helpers/navigation.ts";
 
 export const PostActions: FunctionalComponent<{ status: Status }> = (props) => {
   const [status, setStatus] = useState(props.status);
@@ -26,7 +27,7 @@ export const PostActions: FunctionalComponent<{ status: Status }> = (props) => {
       }
 
       if (e === "reply") {
-        request = navigate(`/@${status.account.acct}/${status.id}`);
+        request = navigate(getPostPath(status));
       }
 
       if (request) {
