@@ -211,6 +211,6 @@ type MastodonNotification = {
   id: string;
   type: "favourite" | "reblog" | "status" | "mention" | "poll" | "update";
   account: Account;
-  create_at: string;
+  created_at: string;
   status: Status;
 };
