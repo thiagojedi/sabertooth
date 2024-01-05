@@ -3,6 +3,8 @@ import { useEffect, useRef } from "preact/hooks";
 
 import { emojiText } from "../../helpers/emoji-text.ts";
 
+import styles from "./styles.module.css";
+
 const OPTION_NAME = "choices[]";
 
 type Props = {
@@ -40,57 +42,61 @@ export const PollOptions: FunctionalComponent<Props> = ({
     };
   }, [onVote]);
 
-  return (
-    <>
-      <ul
-        style={{
-          listStyle: "none",
-          padding: 0,
-        }}
-      >
-        {expired || voted ? (
-          options.map(({ title, votes_count }, index) => {
-            const number = ((100 * votes_count) / total)
-              .toFixed(1)
-              .padStart(5, " ");
+  if (expired || voted) {
+    return (
+      <>
+        <ul className={styles.resultList}>
+          {options.map(({ title, votes_count }, index) => {
+            const number = ((100 * votes_count) / total).toFixed(1);
             return (
               <Fragment key={index}>
                 <li
+                  className={styles.resultItem}
                   style={{
-                    fontVariantNumeric: "tabular-nums",
+                    fontWeight: own_votes.includes(index) ? "bold" : "normal",
                   }}
                 >
-                  {number.padStart(5, "0")}% {emojiText(title, emojis)}{" "}
-                  {own_votes.includes(index) && "<-"}
+                  {number.padStart(5, "0")}%{" "}
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: emojiText(title, emojis),
+                    }}
+                  />
                 </li>
                 <hr
-                  style={{
-                    width: number + "%",
-                    margin: 0,
-                    transition: "width 1s ease-in",
-                  }}
+                  className={styles.resultProportion}
+                  style={{ width: number + "%" }}
                 />
               </Fragment>
             );
-          })
-        ) : (
-          <form ref={formRef}>
-            {options.map(({ title }, index) => (
-              <div key={index}>
-                <input
-                  type={multiple ? "checkbox" : "radio"}
-                  id={title}
-                  name={OPTION_NAME}
-                  value={index}
-                />
-                <label htmlFor={title}>{title}</label>
-              </div>
-            ))}
-            <input type="submit" value="Vote!" />
-          </form>
-        )}
-      </ul>
-      {expired && <small>poll ended</small>}
-    </>
+          })}
+          {expired && (
+            <footer>
+              <small>poll ended</small>
+            </footer>
+          )}
+        </ul>
+      </>
+    );
+  }
+
+  return (
+    <form ref={formRef}>
+      {options.map(({ title }, index) => (
+        <div key={index}>
+          <input
+            type={multiple ? "checkbox" : "radio"}
+            id={title}
+            name={OPTION_NAME}
+            value={index}
+          />
+          <label
+            htmlFor={title}
+            dangerouslySetInnerHTML={{ __html: emojiText(title, emojis) }}
+          />
+        </div>
+      ))}
+      <input type="submit" value="Vote!" />
+    </form>
   );
 };

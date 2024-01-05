@@ -1,0 +1,14 @@
+.resultList {
+  list-style: none;
+  padding: 0;
+}
+
+.resultItem {
+  font-variant-numeric: tabular-nums;
+}
+
+.resultProportion {
+  width: 0;
+  margin: 0;
+  transition: width 1s ease-in;
+}
