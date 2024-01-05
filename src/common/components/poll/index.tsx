@@ -3,7 +3,7 @@ import { useEffect, useRef } from "preact/hooks";
 
 import { emojiText } from "../../helpers/emoji-text.ts";
 
-const OPTION_NAME = "choices";
+const OPTION_NAME = "choices[]";
 
 type Props = {
   poll: Poll;
