@@ -6,6 +6,8 @@
   align-items: center;
   padding: 0.2rem;
   background-color: yellow;
+  position: sticky;
+  top: 0;
 }
 
 .header > * {
