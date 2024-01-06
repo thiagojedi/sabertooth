@@ -1,8 +1,6 @@
 import useSWR from "swr";
-import { useNavigate } from "react-router-dom";
 
-import { useAppConfig } from "../../application/hooks.ts";
-import { logout } from "../../application/auth/index.ts";
+import { useAppConfig, useLogout } from "../../application/hooks.ts";
 
 import type { RequestError } from "../../common/errors.ts";
 
@@ -18,21 +16,15 @@ export const useAccountInfo = (account?: string) => {
   return { account: data, error };
 };
 export const useCurrentUser = () => {
-  const navigate = useNavigate();
-  const { data: config, mutate } = useAppConfig();
+  const logout = useLogout();
+
+  const { config } = useAppConfig();
 
   const { data: userData, error } = useSWR<Account>(
     config?.token && "/api/v1/accounts/verify_credentials",
     {
       shouldRetryOnError: (error: RequestError) => error.status !== 401,
-      onError: () =>
-        logout()
-          .then(() => mutate())
-          .then(() =>
-            navigate("/", {
-              replace: true,
-            }),
-          ),
+      onError: logout,
     },
   );
 

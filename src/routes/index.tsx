@@ -16,6 +16,7 @@ import ProfileRoute from "./profile.tsx";
 import PostRoute from "./post.tsx";
 import ComposeRoute from "./compose.tsx";
 import NotificationsRoute from "./notifications.tsx";
+import Logout from "./logout.tsx";
 
 const routeConfig: RouteObject[] = [
   { index: true, element: <Login /> },
@@ -26,6 +27,7 @@ const routeConfig: RouteObject[] = [
     path: "/notifications",
     element: <NotificationsRoute />,
   },
+  { id: "logout", path: "/logout", element: <Logout /> },
   { path: "/:acct", element: <ProfileRoute /> },
   { path: "/:acct/:postId", element: <PostRoute /> },
   { path: "/compose/:replyId?", element: <ComposeRoute /> },
