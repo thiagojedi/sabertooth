@@ -1,21 +1,20 @@
 import { FunctionalComponent, VNode } from "preact";
 
 import styles from "./styles.module.css";
-import { Navigation } from "./navigation.tsx";
 
-type Props = { startSlot?: VNode; endSlot?: VNode };
+type Props = { navigationSlot?: VNode };
 
-export const Layout: FunctionalComponent<Props> = ({ startSlot, children }) => {
-  return (
-    <>
+export const Layout: FunctionalComponent<Props> = ({
+  navigationSlot,
+  children,
+}) => (
+  <>
+    <div className={styles.background}>
       <header className={styles.header}>
-        <div className={styles.avatar}>{startSlot}</div>
         <div className={styles.title}>SaberTooth</div>
-        <div>
-          <Navigation />
-        </div>
+        <div>{navigationSlot}</div>
       </header>
-      <main>{children}</main>
-    </>
-  );
-};
+    </div>
+    <main className={"padding-wrapper"}>{children}</main>
+  </>
+);

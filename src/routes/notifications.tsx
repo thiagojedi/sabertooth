@@ -18,7 +18,7 @@ const NotificationsRoute = () => {
   return (
     <>
       {error && <DebugLog info={error} />}
-      <ul style={{ listStyle: "none", padding: "0 0.5rem" }}>
+      <ul style={{ listStyle: "none" }}>
         {data
           ?.filter(({ type }) => type === "mention")
           .map((n) => (

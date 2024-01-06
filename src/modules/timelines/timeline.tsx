@@ -1,11 +1,11 @@
 import { FunctionalComponent } from "preact";
 
-import { Post } from "./post";
+import { Post } from "./post/index.tsx";
 
 export const Timeline: FunctionalComponent<{ statusList: Status[] }> = ({
   statusList,
 }) => (
-  <div style={{ padding: "0 0.5rem" }}>
+  <div>
     {statusList.map((status) => (
       <>
         <Post key={status.id} status={status} />

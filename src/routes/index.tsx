@@ -2,11 +2,12 @@ import {
   HashRouter,
   Outlet,
   Route,
+  RouteObject,
   Routes as ReactRoutes,
 } from "react-router-dom";
 
 import { Layout } from "../application/layout/index.tsx";
-import { CurrentUserAvatar } from "../modules/users/index.tsx";
+import { Navigation } from "../application/layout/navigation.tsx";
 
 import Login from "./login.tsx";
 import HomeRoute from "./home.tsx";
@@ -16,24 +17,34 @@ import PostRoute from "./post.tsx";
 import ComposeRoute from "./compose.tsx";
 import NotificationsRoute from "./notifications.tsx";
 
+const routeConfig: RouteObject[] = [
+  { index: true, element: <Login /> },
+  { id: "home", path: "/home", element: <HomeRoute /> },
+  { id: "public", path: "/public", element: <PublicRoute /> },
+  {
+    id: "notifications",
+    path: "/notifications",
+    element: <NotificationsRoute />,
+  },
+  { path: "/:acct", element: <ProfileRoute /> },
+  { path: "/:acct/:postId", element: <PostRoute /> },
+  { path: "/compose/:replyId?", element: <ComposeRoute /> },
+];
+
 const IndexRoute = () => (
   <HashRouter>
     <ReactRoutes>
       <Route
         path="/"
         element={
-          <Layout startSlot={<CurrentUserAvatar />}>
+          <Layout navigationSlot={<Navigation routes={routeConfig} />}>
             <Outlet />
           </Layout>
         }
       >
-        <Route index element={<Login />} />
-        <Route path="/home" element={<HomeRoute />} />
-        <Route path="/public" element={<PublicRoute />} />
-        <Route path="/notifications" element={<NotificationsRoute />} />
-        <Route path="/:acct" element={<ProfileRoute />} />
-        <Route path="/:acct/:postId" element={<PostRoute />} />
-        <Route path="/compose/:replyId?" element={<ComposeRoute />} />
+        {routeConfig.map(({ element, index, path }) => (
+          <Route key={path} index={index} path={path} element={element} />
+        ))}
       </Route>
     </ReactRoutes>
   </HashRouter>
