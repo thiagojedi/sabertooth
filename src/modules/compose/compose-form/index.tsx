@@ -45,9 +45,7 @@ export const ComposeForm: FunctionalComponent<Props> = ({
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <label htmlFor="spoiler_text">
-        <small>Content Warning:</small>
-      </label>
+      <label htmlFor="spoiler_text">Content Warning:</label>
       <input
         type="text"
         id="spoiler_text"
@@ -57,9 +55,7 @@ export const ComposeForm: FunctionalComponent<Props> = ({
         placeholder={"optional"}
       />
 
-      <label htmlFor="status">
-        <small>Post Content:</small>
-      </label>
+      <label htmlFor="status">Post Content:</label>
       <textarea
         className={styles.body}
         id="status"
