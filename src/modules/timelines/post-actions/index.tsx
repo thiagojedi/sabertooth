@@ -26,15 +26,13 @@ export const PostActions: FunctionalComponent<{ status: Status }> = (props) => {
         request = value ? boostStatus : unBoostStatus;
       }
 
-      if (e === "reply") {
-        request = navigate(getPostPath(status));
-      }
-
       if (request) {
         request(status.id).then(setStatus);
+      } else {
+        navigate(getPostPath(status));
       }
     },
-    [navigate, status.account.acct, status.id],
+    [navigate, status],
   );
 
   return <PostFooter status={status} onClick={handleClick} />;
