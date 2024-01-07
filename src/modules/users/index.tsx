@@ -8,7 +8,7 @@ import { useCurrentUser } from "./hooks.ts";
 import type { FunctionalComponent } from "preact";
 
 export const CurrentUserAvatar: FunctionalComponent = () => {
-  const currentUser = useCurrentUser();
+  const { userData: currentUser } = useCurrentUser();
 
   const navigate = useNavigate();
 
