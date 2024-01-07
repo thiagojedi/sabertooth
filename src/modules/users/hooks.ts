@@ -31,3 +31,17 @@ export const useCurrentUser = () => {
 
   return { userData: error ? undefined : userData, isLoading };
 };
+
+type UserPreferences = {
+  "posting:default:visibility": Visibility;
+  "posting:default:sensitive": boolean;
+  "posting:default:language": string;
+  "reading:expand:media": "default";
+  "reading:expand:spoilers": boolean;
+};
+
+export const usePreferences = () => {
+  const { data } = useSWR<UserPreferences>("/api/v1/preferences");
+
+  return data;
+};

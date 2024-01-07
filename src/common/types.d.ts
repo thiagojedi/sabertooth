@@ -5,7 +5,7 @@ type Status = {
   in_reply_to_account_id: null;
   sensitive: boolean;
   spoiler_text: string;
-  visibility: string;
+  visibility: Visibility;
   language: string;
   uri: string;
   url: string;
@@ -30,6 +30,8 @@ type Status = {
   card: Card;
   poll: null | Poll;
 };
+
+type Visibility = "public" | "private" | "unlisted" | "direct";
 
 type Account = {
   id: string;

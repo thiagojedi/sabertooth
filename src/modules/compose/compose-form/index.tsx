@@ -8,9 +8,16 @@ import styles from "./styles.module.css";
 const fetch = getFetcher()!;
 
 type Props = {
-  initialData: { cw?: string; text?: string };
+  initialData: Partial<{ cw: string; text: string; visibility: string }>;
   onSubmit?: () => void;
   additionalInputs?: VNode;
+};
+
+const visibilityOptions: Record<Visibility, string> = {
+  public: "Public",
+  unlisted: "Unlisted",
+  private: "Followers Only",
+  direct: "Mentioned Only",
 };
 
 export const ComposeForm: FunctionalComponent<Props> = ({
@@ -20,6 +27,7 @@ export const ComposeForm: FunctionalComponent<Props> = ({
 }) => {
   const [cw, setCw] = useState(initialData.cw);
   const [body, setBody] = useState(initialData.text);
+  const [visibility, setVisibility] = useState(initialData.visibility);
   useEffect(() => {
     setCw(initialData.cw);
     setBody(initialData.text);
@@ -62,15 +70,17 @@ export const ComposeForm: FunctionalComponent<Props> = ({
       />
 
       <div className={styles.footer}>
-        <select name="visibility">
-          <option value="public" default>
-            Public
-          </option>
-          <option value="unlisted">Unlisted</option>
-          <option value="private">Followers</option>
-          <option value="direct">Only Mentioned</option>
+        <select
+          name="visibility"
+          value={visibility}
+          onChange={(e) => setVisibility(e.currentTarget.value)}
+        >
+          {Object.entries(visibilityOptions).map(([value, label]) => (
+            <option key={value} value={value}>
+              {label}
+            </option>
+          ))}
         </select>
-        &nbsp;
         <input type="submit" value="Toot!" />
       </div>
 
