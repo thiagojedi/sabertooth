@@ -9,7 +9,7 @@ export const ReplyButton: FunctionalComponent<{ id: string }> = ({ id }) => {
   return (
     <button
       className={styles.replyButton}
-      onClick={() => navigate(`/compose/${id}`)}
+      onClick={() => navigate(`/reply/${id}`)}
     >
       Reply
     </button>

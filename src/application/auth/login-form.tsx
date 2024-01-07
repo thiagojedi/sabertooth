@@ -1,8 +1,5 @@
 import { FunctionalComponent } from "preact";
-import { useEffect, useState } from "preact/hooks";
-import { useNavigate } from "react-router-dom";
-
-import { useCurrentUser } from "../../modules/users/hooks.ts";
+import { useState } from "preact/hooks";
 
 import { authApp } from "./index.ts";
 import { useAuthCallback } from "./use-auth-callback.tsx";
@@ -11,14 +8,6 @@ export const LoginForm: FunctionalComponent = () => {
   useAuthCallback();
 
   const [server, setServer] = useState("");
-
-  const navigate = useNavigate();
-  const user = useCurrentUser();
-  useEffect(() => {
-    if (user) {
-      navigate("/home");
-    }
-  }, [navigate, user]);
 
   return (
     <form

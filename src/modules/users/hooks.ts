@@ -20,13 +20,14 @@ export const useCurrentUser = () => {
 
   const { config } = useAppConfig();
 
-  const { data: userData, error } = useSWR<Account>(
-    config?.token && "/api/v1/accounts/verify_credentials",
-    {
-      shouldRetryOnError: (error: RequestError) => error.status !== 401,
-      onError: logout,
-    },
-  );
+  const {
+    data: userData,
+    error,
+    isLoading,
+  } = useSWR<Account>(config?.token && "/api/v1/accounts/verify_credentials", {
+    shouldRetryOnError: (error: RequestError) => error.status !== 401,
+    onError: logout,
+  });
 
-  return error ? undefined : userData;
+  return { userData: error ? undefined : userData, isLoading };
 };

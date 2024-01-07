@@ -27,10 +27,11 @@ const routeConfig: RouteObject[] = [
     path: "/notifications",
     element: <NotificationsRoute />,
   },
+  { id: "toot", path: "/compose", element: <ComposeRoute /> },
   { id: "logout", path: "/logout", element: <Logout /> },
   { path: "/:acct", element: <ProfileRoute /> },
   { path: "/:acct/:postId", element: <PostRoute /> },
-  { path: "/compose/:replyId?", element: <ComposeRoute /> },
+  { path: "/reply/:replyId?", element: <ComposeRoute /> },
 ];
 
 const IndexRoute = () => (
