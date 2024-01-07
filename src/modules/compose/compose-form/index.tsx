@@ -2,6 +2,7 @@ import { FunctionalComponent, VNode } from "preact";
 import { useCallback, useEffect, useState } from "preact/hooks";
 
 import { getFetcher } from "../../../common/helpers/request.ts";
+import { useServerPreferences } from "../../../application/hooks.ts";
 
 import styles from "./styles.module.css";
 
@@ -43,6 +44,8 @@ export const ComposeForm: FunctionalComponent<Props> = ({
     [onSubmit],
   );
 
+  const config = useServerPreferences();
+
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <label htmlFor="spoiler_text">Content Warning:</label>
@@ -63,6 +66,7 @@ export const ComposeForm: FunctionalComponent<Props> = ({
         value={body}
         onChange={(e) => setBody(e.currentTarget.value)}
         required
+        maxLength={config?.statuses.max_characters}
       />
 
       <div className={styles.footer}>

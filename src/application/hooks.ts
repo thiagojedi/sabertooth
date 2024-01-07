@@ -30,3 +30,16 @@ export const useLogout = (instant = false) => {
 
   return logoutCb;
 };
+
+export const useServerInfo = (server?: string) => {
+  const { config } = useAppConfig();
+
+  const { data } = useSWRImmutable<ServerInfo>(
+    () => `https://${server ?? config!.server}/api/v1/instance`,
+    (url: string) => fetch(url).then((r) => r.json()),
+  );
+
+  return data;
+};
+
+export const useServerPreferences = () => useServerInfo()?.configuration;

@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ComposeForm } from "../modules/compose/compose-form/index.tsx";
 import { useCurrentUser, usePreferences } from "../modules/users/hooks.ts";
 import { useStatus } from "../modules/timelines/hooks/use-status.ts";
-import { DebugLog } from "../common/components/error/index.tsx";
 
 const ComposeRoute = () => {
   const { replyId } = useParams();
@@ -23,6 +22,7 @@ const ComposeRoute = () => {
     .join(" ");
 
   const navigate = useNavigate();
+
   return (
     <>
       <ComposeForm
@@ -47,7 +47,6 @@ const ComposeRoute = () => {
           </>
         }
       />
-      <DebugLog info={preferences} />
     </>
   );
 };

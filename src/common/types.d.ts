@@ -216,3 +216,11 @@ type MastodonNotification = {
   created_at: string;
   status: Status;
 };
+
+type ServerInfo = {
+  configuration: {
+    statuses: {
+      max_characters: number;
+    };
+  };
+};
