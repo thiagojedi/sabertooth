@@ -3,3 +3,10 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.footer button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
