@@ -12,7 +12,9 @@ export const unFavouriteStatus = (statusId: string) =>
   request(`/api/v1/statuses/${statusId}/unfavourite`);
 
 export const boostStatus = (statusId: string) =>
-  request(`/api/v1/statuses/${statusId}/reblog`);
+  request(`/api/v1/statuses/${statusId}/reblog`).then(
+    (status) => status.reblog!,
+  );
 
 export const unBoostStatus = (statusId: string) =>
   request(`/api/v1/statuses/${statusId}/unreblog`);

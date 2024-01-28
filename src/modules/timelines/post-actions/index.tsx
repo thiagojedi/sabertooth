@@ -18,19 +18,19 @@ export const PostActions: FunctionalComponent<{ status: Status }> = (props) => {
 
   const handleClick = useCallback(
     (e: "fav" | "boost" | "reply", value?: boolean) => {
-      let request;
       if (e === "fav") {
-        request = value ? favouriteStatus : unFavouriteStatus;
-      }
-      if (e === "boost") {
-        request = value ? boostStatus : unBoostStatus;
+        const request = value ? favouriteStatus : unFavouriteStatus;
+        request(status.id).then(setStatus);
+        return;
       }
 
-      if (request) {
+      if (e === "boost") {
+        const request = value ? boostStatus : unBoostStatus;
         request(status.id).then(setStatus);
-      } else {
-        navigate(getPostPath(status));
+        return;
       }
+
+      navigate(getPostPath(status));
     },
     [navigate, status],
   );
