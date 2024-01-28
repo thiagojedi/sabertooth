@@ -1,11 +1,11 @@
 import { FunctionalComponent } from "preact";
 
-import { PostHeader } from "../../../common/components/post-header";
-import { MediaCarousel } from "../../../common/components/media-carousel";
+import { PostHeader } from "../../../common/components/post-header/index.tsx";
+import { MediaCarousel } from "../../../common/components/media-carousel/index.tsx";
 import { emojiText } from "../../../common/helpers/emoji-text.ts";
-import { PostActions } from "../post-actions";
-import { useMentionLinks } from "../hooks";
-import { PostPoll } from "../post-poll";
+import { PostActions } from "../post-actions/index.tsx";
+import { useMentionLinks } from "../hooks/index.ts";
+import { PostPoll } from "../post-poll/index.tsx";
 
 import styles from "./styles.module.css";
 
@@ -15,6 +15,7 @@ const Content = ({ status }: { status: Status }) => {
     <>
       <div
         ref={ref}
+        className={styles.content}
         dangerouslySetInnerHTML={{
           __html: emojiText(status.content, status.emojis),
         }}
