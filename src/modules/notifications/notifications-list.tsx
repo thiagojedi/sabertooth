@@ -53,7 +53,12 @@ export const NotificationList: FC<Props> = ({ notifications: data }) => (
           <PollFinished notification={notification} />
         )}
         <br />
-        <small>@{notification.account.acct}</small>
+        <small
+          className={styles.username}
+          title={"@" + notification.account.acct}
+        >
+          @{notification.account.acct}
+        </small>
         <br />
         <small>{dayjs(notification.created_at).format("L LT")}</small>
         <hr />

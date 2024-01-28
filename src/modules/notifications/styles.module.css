@@ -2,3 +2,12 @@
   list-style: none;
   padding: 0px;
 }
+
+.username {
+  display: inline-block;
+  padding: 0;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
