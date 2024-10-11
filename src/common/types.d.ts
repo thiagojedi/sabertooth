@@ -214,7 +214,7 @@ type MastodonNotification = {
   type: "favourite" | "reblog" | "status" | "mention" | "poll" | "update";
   account: Account;
   created_at: string;
-  status: Status;
+  status: Status | null;
 };
 
 type ServerInfo = {

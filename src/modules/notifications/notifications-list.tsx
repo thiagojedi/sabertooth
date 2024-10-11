@@ -18,51 +18,55 @@ type Props = {
 
 const Mention: FC<{ notification: MastodonNotification }> = ({
   notification,
-}) => (
-  <Fragment>
-    <span
-      dangerouslySetInnerHTML={{
-        __html: emojiText(
-          notification.account.display_name,
-          notification.account.emojis,
-        ),
-      }}
-    />{" "}
-    <Link to={getPostPath(notification.status)}>mentioned</Link> you{" "}
-    {dayjs(notification.created_at).fromNow()}
-  </Fragment>
-);
+}) =>
+  notification.status && (
+    <Fragment>
+      <span
+        dangerouslySetInnerHTML={{
+          __html: emojiText(
+            notification.account.display_name,
+            notification.account.emojis,
+          ),
+        }}
+      />{" "}
+      <Link to={getPostPath(notification.status)}>mentioned</Link> you{" "}
+      {dayjs(notification.created_at).fromNow()}
+    </Fragment>
+  );
 
 const PollFinished: FC<{ notification: MastodonNotification }> = ({
   notification,
-}) => (
-  <span>
-    A <Link to={getPostPath(notification.status)}>poll</Link> you voted finished{" "}
-    {dayjs(notification.created_at).fromNow()}
-  </span>
-);
+}) =>
+  notification.status && (
+    <span>
+      A <Link to={getPostPath(notification.status)}>poll</Link> you voted
+      finished {dayjs(notification.created_at).fromNow()}
+    </span>
+  );
 
 export const NotificationList: FC<Props> = ({ notifications: data }) => (
   <ul className={styles.list}>
-    {data.map((notification) => (
-      <Fragment key={notification.id}>
-        {notification.type === "mention" && (
-          <Mention notification={notification} />
-        )}
-        {notification.type === "poll" && (
-          <PollFinished notification={notification} />
-        )}
-        <br />
-        <small
-          className={styles.username}
-          title={"@" + notification.account.acct}
-        >
-          @{notification.account.acct}
-        </small>
-        <br />
-        <small>{dayjs(notification.created_at).format("L LT")}</small>
-        <hr />
-      </Fragment>
-    ))}
+    {data
+      .filter((notification) => notification.status)
+      .map((notification) => (
+        <Fragment key={notification.id}>
+          {notification.type === "mention" && (
+            <Mention notification={notification} />
+          )}
+          {notification.type === "poll" && (
+            <PollFinished notification={notification} />
+          )}
+          <br />
+          <small
+            className={styles.username}
+            title={"@" + notification.account.acct}
+          >
+            @{notification.account.acct}
+          </small>
+          <br />
+          <small>{dayjs(notification.created_at).format("L LT")}</small>
+          <hr />
+        </Fragment>
+      ))}
   </ul>
 );
